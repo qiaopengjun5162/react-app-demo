@@ -1,27 +1,43 @@
 import React, { useState } from "react";
 
-import './App.css';
-
 const App = () => {
+    /*
+        CSS 模块
+            使用步骤：
+                1. 创建一个 xxx.module.css
+                2. 在组件中引入css import classes from "./App.module.css";
+                3. 通过 classes 来设置类 className={classes.p1}
+        CSS模块可以动态的设置唯一的class值
+        <p class="App_p1__9uzM-" data-relingo-block="true">我是一个段落</p>
+
+        内联样式
+        外部样式表
+        CSS Module
+
+        React.Fragment 
+            - 是一个专门用来作为父容器的组件
+                它只会将它里面的子元素直接返回，不会创建任何多余的元素
+                等于 空标签 <> </>
+            - 当我们希望有一个父容器，但同时又不希望父容器在网页中产生多余的结构时，就可以使用 Fragment
+    */
     const [redBorder, setRedBorder] = useState(false);
-    const pStyle = {
-        color: "red",
-        backgroundColor: "yellow",
-        fontSize: "20px",
-        border: redBorder ? "3px solid red" : "3px solid blue",
-    };
 
     const handleClick = () => {
         setRedBorder(!redBorder);
     }
 
     return (
-        <div>
-            <h1 style={{ color: "blue", fontSize: "30px" }}>Hello World</h1>
-            {/* <p style={pStyle}>我是一个段落</p> */}
-            <p className={`p1 ${redBorder ? '' : 'blueBorder'}`}>我是一个段落</p>
-            <button onClick={handleClick}>点我一下</button>
-        </div>
+        // <div>
+        //     <p className={classes.p1}>我是一个段落</p>
+        //     <button onClick={handleClick}>点我一下</button>
+        // </div>
+
+        <React.Fragment>
+            <div>第一个组件</div>
+            <div>第二个组件</div>
+            <div>第三个组件</div>
+            <div>第四个组件</div>
+        </React.Fragment>
     );
 };
 
