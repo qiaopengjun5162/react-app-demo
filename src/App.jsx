@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import Meals from "./components/Meals/Meals";
 
 const App = () => {
     /*
@@ -20,24 +21,11 @@ const App = () => {
                 等于 空标签 <> </>
             - 当我们希望有一个父容器，但同时又不希望父容器在网页中产生多余的结构时，就可以使用 Fragment
     */
-    const [redBorder, setRedBorder] = useState(false);
-
-    const handleClick = () => {
-        setRedBorder(!redBorder);
-    }
 
     return (
-        // <div>
-        //     <p className={classes.p1}>我是一个段落</p>
-        //     <button onClick={handleClick}>点我一下</button>
-        // </div>
-
-        <React.Fragment>
-            <div>第一个组件</div>
-            <div>第二个组件</div>
-            <div>第三个组件</div>
-            <div>第四个组件</div>
-        </React.Fragment>
+        <div>
+            <Meals />
+        </div>
     );
 };
 
