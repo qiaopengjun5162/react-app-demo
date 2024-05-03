@@ -1,6 +1,61 @@
 import React from "react";
 import Meals from "./components/Meals/Meals";
 
+// 模拟一组食物数据
+const MEALS_DATA = [
+    {
+        id: "001",
+        title: "汉堡包",
+        description: "百分百纯牛肉，加上奶酪、番茄、生菜和洋葱，再沾上美乃滋酱",
+        price: 12.99,
+        image: "/img/meals/1.png",
+    },
+    {
+        id: "002",
+        title: "双层汉堡",
+        description: "双层汉堡，百分百纯牛肉，加上奶酪、番茄、生菜和洋葱，再沾上美乃滋酱",
+        price: 34.99,
+        image: "/img/meals/2.png",
+    },
+    {
+        id: "003",
+        title: "巨无霸汉堡",
+        description: "巨无霸汉堡，百分百纯牛肉，加上奶酪、番茄、生菜和洋葱，再沾上美乃滋酱",
+        price: 22.99,
+        image: "/img/meals/3.png",
+    },
+    {
+        id: "004",
+        title: "麦辣鸡腿汉堡",
+        description: "百分百纯牛肉，加上奶酪、番茄、生菜和洋葱，再沾上美乃滋酱",
+        price: 18.99,
+        image: "/img/meals/4.png",
+    },
+    {
+        id: "005",
+        title: "麦乐鸡",
+        description: "百分百纯牛肉，加上奶酪、番茄、生菜和洋葱，再沾上美乃滋酱",
+        price: 15.99,
+        image: "/img/meals/5.png",
+    },
+    {
+        id: "006",
+        title: "板烧鸡腿堡",
+        description: "板烧鸡腿堡，百分百纯牛肉，加上奶酪、番茄、生菜和洋葱，再沾上美乃滋酱",
+        price: 35.99,
+        image: "/img/meals/6.png",
+    },
+    {
+        id: "007",
+        title: "吉士汉堡包",
+        description: "吉士汉堡包，百分百纯牛肉，加上奶酪、番茄、生菜和洋葱，再沾上美乃滋酱",
+        price: 25.99,
+        image: "/img/meals/7.png",
+    },
+
+
+]
+
 const App = () => {
     /*
         CSS 模块
@@ -22,9 +77,16 @@ const App = () => {
             - 当我们希望有一个父容器，但同时又不希望父容器在网页中产生多余的结构时，就可以使用 Fragment
     */
 
+    // 创建一个state用来存储食物数据
+    const [meals, setMeals] = React.useState(MEALS_DATA);
+
+    // 创建一个函数用来更新state
+    const updateMeals = () => {
+        setMeals(MEALS_DATA);
+    }
     return (
         <div>
-            <Meals />
+            <Meals mealsData={meals} />
         </div>
     );
 };

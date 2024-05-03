@@ -3,17 +3,10 @@ import Meal from './Meal/Meal'
 import classes from './Meals.module.css'
 
 // 食物列表组件
-const Meals = () => {
+const Meals = (props) => {
     return (
         <div className={classes.Meals}>
-            <Meal />
-            <Meal />
-            <Meal />
-            <Meal />
-            <Meal />
-            <Meal />
-            <Meal />
-            <Meal />
+            {props.mealsData.map(meal => <Meal key={meal.id} meal={meal} />)}
         </div>
     )
 }
