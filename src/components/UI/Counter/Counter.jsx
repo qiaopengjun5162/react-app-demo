@@ -1,6 +1,7 @@
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import CartContext from '../../../store/cartContext'
 import classes from './Counter.module.css'
 
 /*
@@ -26,16 +27,24 @@ import classes from './Counter.module.css'
 
 // 计数器的组件
 const Counter = (props) => {
+    const cartCtx = React.useContext(CartContext);
+
     // 添加购物车的函数
     const addToCartHandler = () => {
         // 调用父组件传递过来的函数
-        props.onAdd(props.meal);
+        // props.onAdd(props.meal);
+
+        // 调用购物车上下文中的函数
+        cartCtx.addItem(props.meal);
     };
 
     // 减少购物车的函数
     const removeFromCartHandler = () => {
         // 调用父组件传递过来的函数
-        props.onSub(props.meal);
+        // props.onSub(props.meal);
+
+        // 调用购物车上下文中的函数
+        cartCtx.removeItem(props.meal);
     };
 
     // 返回计数器的组件

@@ -1,8 +1,6 @@
 import React from "react";
-import TestContextDemo from "./Tests/TestContextDemo";
-import TestContextDemo2 from "./Tests/TestContextDemo2";
 import Meals from "./components/Meals/Meals";
-import TestContext from "./store/testContext";
+import CartContext from "./store/cartContext";
 
 // 模拟一组食物数据
 const MEALS_DATA = [
@@ -96,7 +94,7 @@ const App = () => {
     });
 
     // 向购物车中添加商品
-    const addMealHandler = (meal) => {
+    const addItem = (meal) => {
         // meal 要添加进购物车的商品
         // 对购物车进行复制
         const newCartData = { ...cartData };
@@ -120,7 +118,7 @@ const App = () => {
     }
 
     // 删除购物车中的商品
-    const deleteMealHandler = (meal) => {
+    const removeItem = (meal) => {
         // 对购物车进行复制
         const newCartData = { ...cartData };
         // 获取购物车中该商品的索引
@@ -144,21 +142,14 @@ const App = () => {
 
 
     return (
-        <TestContext.Provider value={{ name: "林黛玉", age: 14 }}>
-
+        <CartContext.Provider value={{ ...cartData, addItem, removeItem }}>
             <div>
-                <TestContextDemo />
-                <TestContext.Provider value={{ name: "薛宝钗", age: 16 }}>
-                    <TestContextDemo2 />
-                </TestContext.Provider>
-
                 <Meals
                     mealsData={meals}
-                    onAdd={addMealHandler}
-                    onSub={deleteMealHandler}
                 />
             </div>
-        </TestContext.Provider>
+        </CartContext.Provider>
+
     );
 };
 
