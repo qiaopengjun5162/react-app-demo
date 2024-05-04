@@ -1,5 +1,8 @@
 import React from "react";
+import TestContextDemo from "./Tests/TestContextDemo";
+import TestContextDemo2 from "./Tests/TestContextDemo2";
 import Meals from "./components/Meals/Meals";
+import TestContext from "./store/testContext";
 
 // 模拟一组食物数据
 const MEALS_DATA = [
@@ -141,13 +144,21 @@ const App = () => {
 
 
     return (
-        <div>
-            <Meals
-                mealsData={meals}
-                onAdd={addMealHandler}
-                onSub={deleteMealHandler}
-            />
-        </div>
+        <TestContext.Provider value={{ name: "林黛玉", age: 14 }}>
+
+            <div>
+                <TestContextDemo />
+                <TestContext.Provider value={{ name: "薛宝钗", age: 16 }}>
+                    <TestContextDemo2 />
+                </TestContext.Provider>
+
+                <Meals
+                    mealsData={meals}
+                    onAdd={addMealHandler}
+                    onSub={deleteMealHandler}
+                />
+            </div>
+        </TestContext.Provider>
     );
 };
 
