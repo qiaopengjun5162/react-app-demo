@@ -26,20 +26,32 @@ import classes from './Counter.module.css'
 
 // 计数器的组件
 const Counter = (props) => {
+    // 添加购物车的函数
+    const addToCartHandler = () => {
+        // 调用父组件传递过来的函数
+        props.onAdd(props.meal);
+    };
+
+    // 减少购物车的函数
+    const removeFromCartHandler = () => {
+        // 调用父组件传递过来的函数
+        props.onSub(props.meal);
+    };
+
+    // 返回计数器的组件
     return (
         <div className="Counter">
             {
-                (props.amount && props.amount !== 0) ? (
+                (props.meal.amount && props.meal.amount !== 0) ? (
                     <>
-                        <button className={classes.Sub}>
+                        <button className={classes.Sub} onClick={removeFromCartHandler}>
                             <FontAwesomeIcon icon={faMinus} />
                         </button>
-                        <span className={classes.Count}>{props.amount}</span>
+                        <span className={classes.Count}>{props.meal.amount}</span>
                     </>
                 ) : null
             }
-            <button className={classes.Add}>
-                {/* <span>+</span> */}
+            <button className={classes.Add} onClick={addToCartHandler}>
                 <FontAwesomeIcon icon={faPlus} />
             </button>
         </div>

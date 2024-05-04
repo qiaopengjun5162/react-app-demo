@@ -80,13 +80,73 @@ const App = () => {
     // 创建一个state用来存储食物数据
     const [meals, setMeals] = React.useState(MEALS_DATA);
 
-    // 创建一个函数用来更新state
-    const updateMeals = () => {
-        setMeals(MEALS_DATA);
+    // 创建一个state用来存储购物车的数据
+    /*
+        1. 商品 []
+        2. 商品总数 totalAmount
+        3. 商品总价 totalPrice
+    */
+    const [cartData, setCartData] = React.useState({
+        items: [],
+        totalAmount: 0,
+        totalPrice: 0,
+    });
+
+    // 向购物车中添加商品
+    const addMealHandler = (meal) => {
+        // meal 要添加进购物车的商品
+        // 对购物车进行复制
+        const newCartData = { ...cartData };
+        // 判断购物车中是否存在该商品
+        if (newCartData.items.indexOf(meal) === -1) {
+            // 如果不存在，则添加
+            newCartData.items.push(meal);
+            // 修改商品的数量
+            meal.amount = 1;
+        } else {
+            // 如果存在，则修改商品的数量
+            meal.amount++;
+        }
+        // 计算商品总数
+        newCartData.totalAmount += 1;
+        // 计算商品总价
+        newCartData.totalPrice += meal.price;
+
+        // 更新购物车数据
+        setCartData(newCartData);
     }
+
+    // 删除购物车中的商品
+    const deleteMealHandler = (meal) => {
+        // 对购物车进行复制
+        const newCartData = { ...cartData };
+        // 获取购物车中该商品的索引
+        const index = newCartData.items.indexOf(meal);
+        // 删除该商品
+        meal.amount--;
+        // 如果等于0，则删除该商品
+        if (meal.amount === 0) {
+            // 如果等于1，则删除该商品
+            newCartData.items.splice(index, 1);
+        }
+
+        // 计算商品总数
+        newCartData.totalAmount -= 1;
+        // 计算商品总价
+        newCartData.totalPrice -= meal.price;
+
+        // 更新购物车数据
+        setCartData(newCartData);
+    }
+
+
     return (
         <div>
-            <Meals mealsData={meals} />
+            <Meals
+                mealsData={meals}
+                onAdd={addMealHandler}
+                onSub={deleteMealHandler}
+            />
         </div>
     );
 };
