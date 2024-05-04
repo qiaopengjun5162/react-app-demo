@@ -2,9 +2,9 @@
     /* 开启弹性盒 */
     display: flex;
     /* 设置外边距 */
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     /* 设置内边距 */
-    padding: 1rem;
+    padding: 0.5rem;
     /* 设置背景颜色 */
     background-color: #fff;
     /* 设置边框 */

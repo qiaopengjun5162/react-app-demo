@@ -1,4 +1,5 @@
 import React from "react";
+import FilterMeals from "./components/FilterMeals/FilterMeals";
 import Meals from "./components/Meals/Meals";
 import CartContext from "./store/cartContext";
 
@@ -144,6 +145,7 @@ const App = () => {
     return (
         <CartContext.Provider value={{ ...cartData, addItem, removeItem }}>
             <div>
+                <FilterMeals />
                 <Meals
                     mealsData={meals}
                 />
