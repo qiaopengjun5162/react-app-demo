@@ -2,7 +2,6 @@ import React from "react";
 import Cart from "./components/Cart/Cart";
 import FilterMeals from "./components/FilterMeals/FilterMeals";
 import Meals from "./components/Meals/Meals";
-import Backdrop from "./components/UI/Backdrop/Backdrop";
 import CartContext from "./store/cartContext";
 
 // 模拟一组食物数据
@@ -11,21 +10,21 @@ const MEALS_DATA = [
         id: "001",
         title: "汉堡包",
         description: "百分百纯牛肉，加上奶酪、番茄、生菜和洋葱，再沾上美乃滋酱",
-        price: 12.99,
+        price: 12.92,
         image: "/img/meals/1.png",
     },
     {
         id: "002",
         title: "双层汉堡",
         description: "双层汉堡，百分百纯牛肉，加上奶酪、番茄、生菜和洋葱，再沾上美乃滋酱",
-        price: 34.99,
+        price: 34.00,
         image: "/img/meals/2.png",
     },
     {
         id: "003",
         title: "巨无霸汉堡",
         description: "巨无霸汉堡，百分百纯牛肉，加上奶酪、番茄、生菜和洋葱，再沾上美乃滋酱",
-        price: 22.99,
+        price: 22.29,
         image: "/img/meals/3.png",
     },
     {
@@ -39,21 +38,21 @@ const MEALS_DATA = [
         id: "005",
         title: "麦乐鸡",
         description: "百分百纯牛肉，加上奶酪、番茄、生菜和洋葱，再沾上美乃滋酱",
-        price: 15.99,
+        price: 15.90,
         image: "/img/meals/5.png",
     },
     {
         id: "006",
         title: "板烧鸡腿堡",
         description: "板烧鸡腿堡，百分百纯牛肉，加上奶酪、番茄、生菜和洋葱，再沾上美乃滋酱",
-        price: 35.99,
+        price: 35.90,
         image: "/img/meals/6.png",
     },
     {
         id: "007",
         title: "吉士汉堡包",
         description: "吉士汉堡包，百分百纯牛肉，加上奶酪、番茄、生菜和洋葱，再沾上美乃滋酱",
-        price: 25.99,
+        price: 25.19,
         image: "/img/meals/7.png",
     },
 
@@ -166,7 +165,7 @@ const App = () => {
                     mealsData={meals}
                 />
                 <Cart />
-                <Backdrop />
+                {/* <Backdrop /> */}
             </div>
         </CartContext.Provider>
 
