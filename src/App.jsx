@@ -94,6 +94,20 @@ const App = () => {
         totalPrice: 0,
     });
 
+    // 创建一个过滤meals的方法
+    const filterMealsHandler = (keyword) => {
+        // 判断是否为空
+        if (keyword.trim().length === 0) {
+            // 如果是空，则返回所有的数据
+            setMeals(MEALS_DATA);
+            return;
+        }
+        // 过滤数据
+        const newMeals = MEALS_DATA.filter(meal => meal.title.toLowerCase().indexOf(keyword.toLowerCase()) !== -1);
+        // 更新数据
+        setMeals(newMeals);
+    }
+
     // 向购物车中添加商品
     const addItem = (meal) => {
         // meal 要添加进购物车的商品
@@ -145,7 +159,7 @@ const App = () => {
     return (
         <CartContext.Provider value={{ ...cartData, addItem, removeItem }}>
             <div>
-                <FilterMeals />
+                <FilterMeals onFilter={filterMealsHandler} />
                 <Meals
                     mealsData={meals}
                 />
