@@ -1,4 +1,5 @@
 import React from "react";
+import Cart from "./components/Cart/Cart";
 import FilterMeals from "./components/FilterMeals/FilterMeals";
 import Meals from "./components/Meals/Meals";
 import CartContext from "./store/cartContext";
@@ -163,6 +164,7 @@ const App = () => {
                 <Meals
                     mealsData={meals}
                 />
+                <Cart />
             </div>
         </CartContext.Provider>
 
