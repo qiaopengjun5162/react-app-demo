@@ -2,6 +2,7 @@ import React from "react";
 import Cart from "./components/Cart/Cart";
 import FilterMeals from "./components/FilterMeals/FilterMeals";
 import Meals from "./components/Meals/Meals";
+import Backdrop from "./components/UI/Backdrop/Backdrop";
 import CartContext from "./store/cartContext";
 
 // 模拟一组食物数据
@@ -165,6 +166,7 @@ const App = () => {
                     mealsData={meals}
                 />
                 <Cart />
+                <Backdrop />
             </div>
         </CartContext.Provider>
 
