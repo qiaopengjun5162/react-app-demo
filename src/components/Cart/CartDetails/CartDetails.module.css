@@ -1,0 +1,42 @@
+.CartDetails {
+    background-color: #fff;
+    width: 30rem;
+    bottom: 0;
+    position: absolute;
+    padding-bottom: 8rem;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+    max-height: 50rem;
+    display: flex;
+    flex-flow: column;
+}
+
+.CartDetailsHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 2rem;
+}
+
+.CartDetailsTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.CartDetailsClear {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+    color: #000;
+    cursor: pointer;
+}
+
+.CartDetailsClear span {
+    color: #000;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.CartDetailsMeals {
+    overflow: auto;
+}

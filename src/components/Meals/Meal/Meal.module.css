@@ -49,6 +49,10 @@ img {
     text-align: justify;
 }
 
+.DescBox {
+    flex: auto;
+}
+
 .PriceWrapper {
     display: flex;
     align-items: center;
