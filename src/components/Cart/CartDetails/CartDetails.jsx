@@ -15,27 +15,33 @@ const CartDetails = () => {
     const [showConfirm, setShowConfirm] = useState(false);
 
     // cancelHandle
-    const cancelHandle = () => {
+    const cancelHandle = (e) => {
+        e.stopPropagation();
         setShowConfirm(false);
+    }
+
+    // 清空购物车
+    const clearCartHandle = () => {
+        cartCtx.clearCart();
     }
 
     // 显示确认框
     const showConfirmHandle = () => {
-        cartCtx.clearCart();
-        // setShowConfirm(true);
+        setShowConfirm(true);
     }
 
     return (
         <Backdrop>
             {showConfirm && <Confirm
-                ConfirmText={"确定清空购物车？"}
-                onCancel={cancelHandle} onConfirm={showConfirmHandle} />}
+                confirmText={"确定清空购物车？"}
+                onCancel={cancelHandle} onConfirm={clearCartHandle} />}
 
             <div onClick={e => e.stopPropagation()}
                 className={classes.CartDetails}>
                 <header className={classes.CartDetailsHeader}>
                     <h2 className={classes.CartDetailsTitle}>餐品详情</h2>
-                    <div className={classes.CartDetailsClear}>
+                    <div onClick={showConfirmHandle}
+                        className={classes.CartDetailsClear}>
                         <FontAwesomeIcon icon={faTrash} />
                         <span>清空购物车</span>
                     </div>

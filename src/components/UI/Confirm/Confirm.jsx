@@ -6,7 +6,7 @@ const Confirm = (props) => {
     return (
         <Backdrop onClick={props.onCancel} className={classes.ConfirmOuter}>
             <div className={classes.ConfirmInner}>
-                <p className={classes.ConfirmText}>{props.ConfirmText}</p>
+                <p className={classes.ConfirmText}>{props.confirmText}</p>
                 <div>
                     <button
                         onClick={(e) => {

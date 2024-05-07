@@ -160,16 +160,29 @@ const App = () => {
         return +(Math.round(num + 'e+2') + 'e-2');
     }
 
+    const clearCart = () => {
+        // 对购物车进行复制
+        const newCartData = { ...cartData };
+        // 将购物车中商品的数量清零
+        // newCartData.items.forEach(meal => meal.amount = 0);
+        newCartData.items.forEach(meal => delete meal.amount);
+        // 重置购物车数据
+        newCartData.items = [];
+        newCartData.totalAmount = 0;
+        newCartData.totalPrice = 0;
+
+        // 更新购物车数据
+        setCartData(newCartData);
+    }
 
     return (
-        <CartContext.Provider value={{ ...cartData, addItem, removeItem }}>
+        <CartContext.Provider value={{ ...cartData, addItem, removeItem, clearCart }}>
             <div>
                 <FilterMeals onFilter={filterMealsHandler} />
                 <Meals
                     mealsData={meals}
                 />
                 <Cart />
-                {/* <Backdrop /> */}
             </div>
         </CartContext.Provider>
 
