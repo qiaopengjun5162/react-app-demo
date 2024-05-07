@@ -127,7 +127,7 @@ const App = () => {
         // 计算商品总数
         newCartData.totalAmount += 1;
         // 计算商品总价
-        newCartData.totalPrice += meal.price;
+        newCartData.totalPrice = roundToTwo(newCartData.totalPrice + meal.price);
 
         // 更新购物车数据
         setCartData(newCartData);
@@ -154,6 +154,10 @@ const App = () => {
 
         // 更新购物车数据
         setCartData(newCartData);
+    }
+
+    function roundToTwo(num) {
+        return +(Math.round(num + 'e+2') + 'e-2');
     }
 
 
