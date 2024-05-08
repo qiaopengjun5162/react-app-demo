@@ -1,0 +1,40 @@
+.bar {
+    position: fixed;
+    width: 28rem;
+    height: 3rem;
+    margin: auto;
+    bottom: 5rem;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    cursor: pointer;
+}
+
+.button {
+    border: none;
+    background-color: #FCBF49;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    width: 10rem;
+    height: 3rem;
+}
+
+.totalPrice {
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+    font-size: 2rem;
+    color: #fff;
+    font-weight: bold;
+}
+
+.totalPrice::before {
+    content: "￥";
+    font-size: 1.2rem;
+}

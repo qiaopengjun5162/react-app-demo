@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import ReactDOM from "react-dom";
 import CartContext from "../../../store/cartContext";
+import Bar from "./Bar/Bar";
 import classes from "./Checkout.module.css";
 import CheckoutItem from "./CheckoutItem/CheckoutItem";
 
@@ -16,6 +17,7 @@ const Checkout = (props) => {
             <div>
                 <FontAwesomeIcon
                     onClick={() => props.onHide()}
+                    // onClick={props.onHide}
                     icon={faTimes} className={classes.close} />
             </div>
             <div className={classes.MealsDesc}>
@@ -32,6 +34,7 @@ const Checkout = (props) => {
                 </footer>
             </div>
 
+            <Bar totalPrice={cartCtx.totalPrice} />
         </div>,
         checkoutRoot
     )

@@ -14,7 +14,7 @@ const CheckoutItem = (props) => {
                     <div className={classes.CheckoutItem__counter}>
                         <Counter meal={props.meal} />
                     </div>
-                    <div className={classes.CheckoutItem__price}>{props.meal.price * props.meal.amount} ₽</div>
+                    <div className={classes.CheckoutItem__price}>{(props.meal.price) * (props.meal.amount)}</div>
                 </div>
             </div>
         </div>
