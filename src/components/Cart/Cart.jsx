@@ -30,6 +30,25 @@ const Cart = () => {
     // }
     // }, [cartCtx.totalAmount]);
 
+    /*
+        默认情况下，useEffect() 中的函数，会在组件渲染完成后调用，并且是每次渲染完成后都会调用
+        在 useEffect() 中，我们可以通过第二个参数来指定 useEffect() 中的函数，会在什么情况下被调用
+        第二个参数是一个数组，数组中的每个元素，都是 useEffect() 中的函数的依赖项
+        如果依赖项发生变化，useEffect() 中的函数，就会重新执行
+        如果依赖项不发生变化，useEffect() 中的函数，就不会重新执行
+        如果依赖项为空数组，useEffect() 中的函数，只会执行一次
+        如果依赖项为 undefined，useEffect() 中的函数，会每次渲染完成后都会重新执行
+        如果依赖项为 null，useEffect() 中的函数，会每次渲染完成后都会重新执行
+        如果依赖项为 false，useEffect() 中的函数，会每次渲染完成后都会重新执行
+        通常情况下，我们都会将依赖项设置为空数组 []
+        如果依赖项为空数组，useEffect() 中的函数，只会执行一次
+
+        通常会将  useEffect() 中使用的所有局部变量，都添加到依赖项中，以避免不必要的重新执行
+        像 setState() 是由钩子函数 useState() 创建的
+        useState() 会确保组件每次重新渲染的时候，都会重新执行 setState() function， 获取到相同的值
+        所以 setState() function 中的值，不会发生变化，可以不添加到依赖项中
+    */
+
     // 添加一个useEffect来监听购物车数量的变化
     useEffect(() => {
         // 检查一下商品的总数量，如果数量为0，则修改 showCartDetails 的状态为false
