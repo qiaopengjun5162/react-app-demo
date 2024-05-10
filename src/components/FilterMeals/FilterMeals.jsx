@@ -7,9 +7,24 @@ const FilterMeals = (props) => {
     const [keyword, setKeyword] = useState('')
 
     // 通过 useEffect 实现过滤
-    useEffect(() => {
-        props.onFilter(keyword)
+    // useEffect(() => {
+    //     props.onFilter(keyword)
 
+    // }, [keyword, props])
+
+    // 通过 useEffect 实现过滤
+    useEffect(() => {
+        // 降低数据过滤的次数，提高用户体验
+        // 用户输入完成后再过滤，用户输入过程中不进行过滤
+        // 当用户输入完成1秒后，再进行过滤
+        const timer = setTimeout(() => {
+            props.onFilter(keyword)
+        }, 1000)
+
+        // 清除定时器
+        return () => {
+            clearTimeout(timer)
+        }
     }, [keyword, props])
 
     const keywordHandler = (e) => {
