@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import iconImg from "../../assets/bag.png";
 import CartContext from "../../store/cartContext";
 import classes from "./Cart.module.css";
 import CartDetails from "./CartDetails/CartDetails";
 import Checkout from "./Checkout/Checkout";
 
+// 添加一个购物车组件
 const Cart = () => {
     const cartCtx = React.useContext(CartContext);
     // 添加一个state来设置购物车详情是否显示
@@ -12,6 +13,32 @@ const Cart = () => {
 
     // 添加一个state用来设置结账页面是否显示
     const [showCheckout, setShowCheckout] = useState(false);
+
+    // 在组件每次重新渲染的时候，检查一下商品的总数量，如果数量为0，则修改 showCartDetails 的状态为false
+    // 组件每次重新渲染，组件的函数体都会重新执行一遍
+    // 以下代码会报错 (Too many re-renders. React limits the number of renders to prevent an infinite loop.)
+    // if (cartCtx.totalAmount === 0) {
+    //     setShowCartDetails(false);
+    // }
+
+    // useEffect 是一个 React Hook，它允许我们在组件中执行副作用操作 (比如发送网络请求，手动修改 DOM 等等)
+    // useEffect 接收一个函数作为参数，该函数会在组件每次重新渲染的时候执行
+    // useEffect(() => {
+    // 检查一下商品的总数量，如果数量为0，则修改 showCartDetails 的状态为false
+    // if (cartCtx.totalAmount === 0) {
+    //     setShowCartDetails(false);
+    // }
+    // }, [cartCtx.totalAmount]);
+
+    // 添加一个useEffect来监听购物车数量的变化
+    useEffect(() => {
+        // 检查一下商品的总数量，如果数量为0，则修改 showCartDetails 的状态为false
+        if (cartCtx.totalAmount === 0) {
+            setShowCartDetails(false);
+            setShowCheckout(false);
+        }
+    }, [cartCtx.totalAmount]);
+
 
     // 添加一个点击事件来切换购物车详情是否显示
     const showCartDetailsHandler = () => {
