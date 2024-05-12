@@ -59,6 +59,50 @@ const MEALS_DATA = [
 
 ]
 
+// 定义一个cartReducer
+const cartReducer = (state, action) => {
+    // 复制购物车
+    const newCartData = { ...state };
+
+    switch (action.type) {
+        default:
+            return state;
+        case "ADD":
+            // 判断购物车中是否存在该商品
+            if (newCartData.items.indexOf(action.meal) === -1) {
+                // 如果不存在，则添加
+                newCartData.items.push(action.meal);
+                // 修改商品的数量
+                action.meal.amount = 1;
+            } else {
+                // 如果存在，则修改商品的数量
+                action.meal.amount++;
+            }
+            // 计算商品总数
+            newCartData.totalAmount += 1;
+            // 计算商品总价
+            newCartData.totalPrice += action.meal.price;
+            return newCartData;
+        case "REMOVE":
+            const index = newCartData.items.indexOf(action.meal);
+            action.meal.amount--;
+            if (action.meal.amount === 0) {
+                // 如果等于1，则删除该商品
+                newCartData.items.splice(index, 1);
+            }
+            newCartData.totalAmount -= 1;
+            newCartData.totalPrice -= action.meal.price;
+            return newCartData;
+        case "CLEAR_CART":
+            newCartData.items.forEach(meal => delete meal.amount);
+            // 重置购物车数据
+            newCartData.items = [];
+            newCartData.totalAmount = 0;
+            newCartData.totalPrice = 0;
+            return newCartData;
+    }
+}
+
 const App = () => {
     /*
         CSS 模块
@@ -89,11 +133,17 @@ const App = () => {
         2. 商品总数 totalAmount
         3. 商品总价 totalPrice
     */
-    const [cartData, setCartData] = React.useState({
+    // const [cartData, setCartData] = React.useState({
+    //     items: [],
+    //     totalAmount: 0,
+    //     totalPrice: 0,
+    // });
+
+    const [cartData, CartDataDispatch] = React.useReducer(cartReducer, {
         items: [],
         totalAmount: 0,
         totalPrice: 0,
-    });
+    })
 
     // 创建一个过滤meals的方法
     const filterMealsHandler = (keyword) => {
@@ -110,73 +160,74 @@ const App = () => {
     }
 
     // 向购物车中添加商品
-    const addItem = (meal) => {
-        // meal 要添加进购物车的商品
-        // 对购物车进行复制
-        const newCartData = { ...cartData };
-        // 判断购物车中是否存在该商品
-        if (newCartData.items.indexOf(meal) === -1) {
-            // 如果不存在，则添加
-            newCartData.items.push(meal);
-            // 修改商品的数量
-            meal.amount = 1;
-        } else {
-            // 如果存在，则修改商品的数量
-            meal.amount++;
-        }
-        // 计算商品总数
-        newCartData.totalAmount += 1;
-        // 计算商品总价
-        newCartData.totalPrice = roundToTwo(newCartData.totalPrice + meal.price);
+    // const addItem = (meal) => {
+    //     // meal 要添加进购物车的商品
+    //     // 对购物车进行复制
+    //     const newCartData = { ...cartData };
+    //     // 判断购物车中是否存在该商品
+    //     if (newCartData.items.indexOf(meal) === -1) {
+    //         // 如果不存在，则添加
+    //         newCartData.items.push(meal);
+    //         // 修改商品的数量
+    //         meal.amount = 1;
+    //     } else {
+    //         // 如果存在，则修改商品的数量
+    //         meal.amount++;
+    //     }
+    //     // 计算商品总数
+    //     newCartData.totalAmount += 1;
+    //     // 计算商品总价
+    //     newCartData.totalPrice = roundToTwo(newCartData.totalPrice + meal.price);
 
-        // 更新购物车数据
-        setCartData(newCartData);
-    }
+    //     // 更新购物车数据
+    //     setCartData(newCartData);
+    // }
 
     // 删除购物车中的商品
-    const removeItem = (meal) => {
-        // 对购物车进行复制
-        const newCartData = { ...cartData };
-        // 获取购物车中该商品的索引
-        const index = newCartData.items.indexOf(meal);
-        // 删除该商品
-        meal.amount--;
-        // 如果等于0，则删除该商品
-        if (meal.amount === 0) {
-            // 如果等于1，则删除该商品
-            newCartData.items.splice(index, 1);
-        }
+    // const removeItem = (meal) => {
+    //     // 对购物车进行复制
+    //     const newCartData = { ...cartData };
+    //     // 获取购物车中该商品的索引
+    //     const index = newCartData.items.indexOf(meal);
+    //     // 删除该商品
+    //     meal.amount--;
+    //     // 如果等于0，则删除该商品
+    //     if (meal.amount === 0) {
+    //         // 如果等于1，则删除该商品
+    //         newCartData.items.splice(index, 1);
+    //     }
 
-        // 计算商品总数
-        newCartData.totalAmount -= 1;
-        // 计算商品总价
-        newCartData.totalPrice -= meal.price;
+    //     // 计算商品总数
+    //     newCartData.totalAmount -= 1;
+    //     // 计算商品总价
+    //     newCartData.totalPrice -= meal.price;
 
-        // 更新购物车数据
-        setCartData(newCartData);
-    }
+    //     // 更新购物车数据
+    //     setCartData(newCartData);
+    // }
 
-    function roundToTwo(num) {
-        return +(Math.round(num + 'e+2') + 'e-2');
-    }
+    // function roundToTwo(num) {
+    //     return +(Math.round(num + 'e+2') + 'e-2');
+    // }
 
-    const clearCart = () => {
-        // 对购物车进行复制
-        const newCartData = { ...cartData };
-        // 将购物车中商品的数量清零
-        // newCartData.items.forEach(meal => meal.amount = 0);
-        newCartData.items.forEach(meal => delete meal.amount);
-        // 重置购物车数据
-        newCartData.items = [];
-        newCartData.totalAmount = 0;
-        newCartData.totalPrice = 0;
+    // const clearCart = () => {
+    //     // 对购物车进行复制
+    //     const newCartData = { ...cartData };
+    //     // 将购物车中商品的数量清零
+    //     // newCartData.items.forEach(meal => meal.amount = 0);
+    //     newCartData.items.forEach(meal => delete meal.amount);
+    //     // 重置购物车数据
+    //     newCartData.items = [];
+    //     newCartData.totalAmount = 0;
+    //     newCartData.totalPrice = 0;
 
-        // 更新购物车数据
-        setCartData(newCartData);
-    }
+    //     // 更新购物车数据
+    //     setCartData(newCartData);
+    // }
 
     return (
-        <CartContext.Provider value={{ ...cartData, addItem, removeItem, clearCart }}>
+        // <CartContext.Provider value={{ ...cartData, addItem, removeItem, clearCart }}>
+        <CartContext.Provider value={{ ...cartData, CartDataDispatch }}>
             <div>
                 <FilterMeals onFilter={filterMealsHandler} />
                 <Meals

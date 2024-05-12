@@ -35,7 +35,12 @@ const Counter = (props) => {
         // props.onAdd(props.meal);
 
         // 调用购物车上下文中的函数
-        cartCtx.addItem(props.meal);
+        // cartCtx.addItem(props.meal);
+
+        cartCtx.CartDataDispatch({
+            type: 'ADD',
+            meal: props.meal
+        });
     };
 
     // 减少购物车的函数
@@ -44,7 +49,12 @@ const Counter = (props) => {
         // props.onSub(props.meal);
 
         // 调用购物车上下文中的函数
-        cartCtx.removeItem(props.meal);
+        // cartCtx.removeItem(props.meal);
+
+        cartCtx.CartDataDispatch({
+            type: 'REMOVE',
+            meal: props.meal
+        })
     };
 
     // 返回计数器的组件

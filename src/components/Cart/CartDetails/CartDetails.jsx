@@ -22,7 +22,11 @@ const CartDetails = () => {
 
     // 清空购物车
     const clearCartHandle = () => {
-        cartCtx.clearCart();
+        // cartCtx.clearCart();
+
+        cartCtx.CartDataDispatch({
+            type: 'CLEAR_CART'
+        })
     }
 
     // 显示确认框
